@@ -1,0 +1,56 @@
+# Flutter-specific
+.build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.idea/
+.vscode/
+.macos/
+linux/
+windows/
+web/
+coverage/
+
+# iOS-specific
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Generated.xcconfig
+ios/Flutter/Flutter.podspec
+
+# Android-specific
+android/.gradle/
+android/app/build/
+android/local.properties
+
+# IDE and OS-specific
+*.iml
+*.ipr
+*.iws
+*.swp
+*.swo
+*.tmp
+*.vscode/
+.DS_Store
+Thumbs.db
+
+# Secrets and credentials
+*.jks
+*.key
+.env
+
+# Logs
+*.log
+
+# Others
+*.lock
+*.orig
+*.bak
+*.rej
+*.class
+*.pyc
+*.pyo
+*.min.css.map
+*.js.map
+
