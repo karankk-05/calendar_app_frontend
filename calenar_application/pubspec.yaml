@@ -12,6 +12,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   animate_do: ^3.3.4
   provider: ^6.1.2
+  lottie: ^3.3.0
 
 dev_dependencies:
   flutter_test:
@@ -26,3 +27,4 @@ flutter:
     - assets/images/light-1.png
     - assets/images/light-2.png
     - assets/images/clock.png
+    - assets/lottie_animation/Welcome.json

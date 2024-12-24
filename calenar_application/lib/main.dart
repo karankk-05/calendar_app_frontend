@@ -1,15 +1,11 @@
-import 'package:calendar_application/core/utils/theme_provider.dart';
+import 'package:calendar_application/features/auth/screens/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:calendar_application/login.dart';
 import 'package:calendar_application/themes/dark_theme.dart';
 import 'package:calendar_application/themes/light_theme.dart';
-import 'package:provider/provider.dart';
-
 void main() {
-  ChangeNotifierProvider(
-      create: (_) => ThemeProvider(),
-      child: MyApp(),
-    );
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -17,13 +13,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<ThemeProvider>(context, listen: false).updateTheme(context);
+
     return MaterialApp(
-      title: 'Flutter Theming',
+      title: 'Calendar Application',
       theme: LightTheme.theme,
       darkTheme: DarkTheme.theme,
-      themeMode: ThemeMode.system, // Automatically switch based on system settings
-      home:  const Login(),
+      themeMode: ThemeMode.system,
+      home: const LoginScreen(),
     );
   }
 }
+

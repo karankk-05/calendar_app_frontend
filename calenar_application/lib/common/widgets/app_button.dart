@@ -14,6 +14,8 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 50,
+      width: double.infinity,
       decoration: BoxDecoration(gradient: gradient, borderRadius: BorderRadius.circular(10)),
       child: TextButton(
         onPressed: onPressed,

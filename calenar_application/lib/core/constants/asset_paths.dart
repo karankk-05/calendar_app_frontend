@@ -5,4 +5,6 @@ class AssetPaths {
   static const String light1 = 'assets/images/light-1.png';
   static const String light2 = 'assets/images/light-2.png';
   static const String clock = 'assets/images/clock.png';
+  static const String welcomeLottie = 'assets/lottie_animation/Welcome.json';
+
 }
