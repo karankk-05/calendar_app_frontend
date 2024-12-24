@@ -1,20 +1,6 @@
-import 'package:flutter/material.dart';
-
-class LightGradients{
-  static const LinearGradient buttonGradient = LinearGradient(
-    colors: [Color.fromARGB(255, 33, 153, 252), Color.fromARGB(255, 109, 188, 252)],
-    begin: Alignment.bottomRight,
-    end: Alignment.topLeft,
-  );
-  static const LinearGradient secondaryGradient = LinearGradient(
-    colors: [Color(0xFF32D74B), Color(0xFF32D74B)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-  );
-}
-
-
 ///Class for defining light theme colors for the whole app
+
+import 'package:flutter/material.dart';
 class LightTheme {
   static final ThemeData theme = ThemeData(
     colorScheme: const ColorScheme(

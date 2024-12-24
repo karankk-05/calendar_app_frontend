@@ -1,21 +1,20 @@
+import 'package:calendar_application/core/constants/gradients.dart';
+import 'package:calendar_application/core/utils/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:calendar_application/themes/dark_theme.dart';
-import 'package:calendar_application/themes/light_theme.dart';
+import 'package:calendar_application/common/widgets/app_button.dart';
+import 'package:provider/provider.dart';
 
-
-
+import 'package:calendar_application/core/constants/asset_paths.dart';
 class Login extends StatelessWidget {
   const Login({super.key});
 
  
   @override
   Widget build(BuildContext context) {
-    final theme=Theme.of(context).colorScheme;
-    final brightness = MediaQuery.of(context).platformBrightness;
-	final isDarkMode = brightness == Brightness.dark;
+    final theme = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      backgroundColor: theme.surface,
+      backgroundColor: theme.colorScheme.surface,
       body: SingleChildScrollView(
       	child: Column(
       	  children: <Widget>[
@@ -23,9 +22,9 @@ class Login extends StatelessWidget {
       	      height: 400,
       	      decoration: BoxDecoration(
       	        image: DecorationImage(
-      	          image: isDarkMode
-      	        ? const AssetImage('assets/images/dark_bg.png')
-      	        : const AssetImage('assets/images/light_bg.png'),
+      	          image: theme.isDarkMode
+      	        ? const AssetImage(AssetPaths.darkBackground)
+      	        : const AssetImage(AssetPaths.lightBackground),
       	          fit: BoxFit.fill
       	        )
       	      ),
@@ -38,7 +37,7 @@ class Login extends StatelessWidget {
       	            child: FadeInUp(duration: const Duration(seconds: 1), child: Container(
       	              decoration: const BoxDecoration(
       	                image: DecorationImage(
-      	                  image: AssetImage('assets/images/light-1.png')
+      	                  image: AssetImage(AssetPaths.light1)
       	                )
       	              ),
       	            )),
@@ -50,7 +49,7 @@ class Login extends StatelessWidget {
       	            child: FadeInUp(duration: const Duration(milliseconds: 1200), child: Container(
       	              decoration: const BoxDecoration(
       	                image: DecorationImage(
-      	                  image: AssetImage('assets/images/light-2.png')
+      	                  image: AssetImage(AssetPaths.light2)
       	                )
       	              ),
       	            )),
@@ -63,7 +62,7 @@ class Login extends StatelessWidget {
       	            child: FadeInUp(duration: const Duration(milliseconds: 1300), child: Container(
       	              decoration: const BoxDecoration(
       	                image: DecorationImage(
-      	                  image: AssetImage('assets/images/clock.png')
+      	                  image: AssetImage(AssetPaths.clock)
       	                )
       	              ),
       	            )),
@@ -86,9 +85,9 @@ class Login extends StatelessWidget {
       	          FadeInUp(duration: const Duration(milliseconds: 1800), child: Container(
       	            padding: const EdgeInsets.all(5),
       	            decoration: BoxDecoration(
-      	              color: theme.surface,
+      	              color: theme.colorScheme.surface,
       	              borderRadius: BorderRadius.circular(10),
-      	                        border: Border.all(color: theme.primary),
+      	                        border: Border.all(color: theme.colorScheme.primary),
       	            boxShadow: const [
       	                 BoxShadow(
       	                  color: Color.fromRGBO(143, 148, 251, .2),
@@ -102,13 +101,13 @@ class Login extends StatelessWidget {
       	                Container(
       	                  padding: const EdgeInsets.all(8.0),
       	                  decoration: BoxDecoration(
-      	                    border: Border(bottom: BorderSide(color:  theme.primary))
+      	                    border: Border(bottom: BorderSide(color:  theme.colorScheme.primary))
       	                  ),
       	                  child: TextField(
       	                    decoration: InputDecoration(
       	                      border: InputBorder.none,
       	                      hintText: "Username (Enter Provided Username)",
-      	                      hintStyle: TextStyle(color: theme.onSurface)
+      	                      hintStyle: TextStyle(color: theme.colorScheme.onSurface)
       	                    ),
       	                  ),
       	                ),
@@ -119,7 +118,7 @@ class Login extends StatelessWidget {
       	                    decoration: InputDecoration(
       	                      border: InputBorder.none,
       	                      hintText: "Password (You can leave it empty)",
-      	                      hintStyle: TextStyle(color: theme.onSurface)
+      	                      hintStyle: TextStyle(color: theme.colorScheme.onSurface)
       	                    ),
       	                  ),
       	                )
@@ -127,25 +126,9 @@ class Login extends StatelessWidget {
       	            ),
       	          )),
       	          const SizedBox(height: 30,),
-      	          FadeInUp(duration: const Duration(milliseconds: 1900), child: Container(
-      	            height: 50,
-      	            decoration: BoxDecoration(
-      	              borderRadius: BorderRadius.circular(10),
-      	              gradient: isDarkMode
-      	        ? DarkGradients.buttonGradient
-      	        : LightGradients.buttonGradient,
-      	            ),
-      							child: Center(
-      							  child: TextButton(
-      								onPressed: () {
-      								  // Add your onPressed code here!
-      								},
-      								child: const Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-      							  ),
-      	            ),
-      	          )),
+      	          FadeInUp(duration: const Duration(milliseconds: 1900), child:AppButton(text: "Login", onPressed:(){}, gradient: theme.isDarkMode?DarkGradients.buttonGradient:LightGradients.buttonGradient) ),
       	          const SizedBox(height: 30,),
-      	          FadeInUp(duration: const Duration(milliseconds: 2000), child: Text("Forgot Password?", style: TextStyle(color: theme.onSurface))),
+      	          FadeInUp(duration: const Duration(milliseconds: 2000), child: Text("Forgot Password?", style: TextStyle(color: theme.colorScheme.onSurface))),
       	        ],
       	      ),
       	    )
