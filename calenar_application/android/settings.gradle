@@ -7,19 +7,26 @@ pluginManagement {
         return flutterSdkPath
     }()
 
+    // Include the Flutter tools from the SDK
     includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
 
     repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
+        google()            // Google's Maven repository
+        mavenCentral()      // Maven Central repository
+        gradlePluginPortal() // Plugin portal for Gradle plugins
     }
 }
 
 plugins {
+    // Load the Flutter plugin for Gradle (to handle Flutter-specific tasks)
     id "dev.flutter.flutter-plugin-loader" version "1.0.0"
-    id "com.android.application" version "7.3.0" apply false
-    id "org.jetbrains.kotlin.android" version "1.7.10" apply false
+
+    // Android Gradle Plugin (updated to the correct version: 7.3.1)
+    id "com.android.application" version "7.3.1" apply false
+
+    // Kotlin Gradle Plugin (updated to a compatible version)
+    id "org.jetbrains.kotlin.android" version "1.8.0" apply false
 }
 
+// Include the app module
 include ":app"

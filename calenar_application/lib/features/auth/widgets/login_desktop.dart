@@ -116,9 +116,9 @@ class LoginDesktop extends StatelessWidget {
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: [
+                  children: const [
                     // Login Header
-                    const Text(
+                    Text(
                       "Login",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -126,9 +126,9 @@ class LoginDesktop extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
                     // Login Form
-                    const LoginForm(),
+                    LoginForm(),
                   ],
                 ),
               ),

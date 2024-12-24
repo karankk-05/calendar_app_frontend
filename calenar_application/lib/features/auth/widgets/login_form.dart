@@ -1,9 +1,43 @@
+import 'package:calendar_application/common/widgets/info_dialog.dart';
+import 'package:calendar_application/features/auth/controllers/login_controller.dart';
+import 'package:calendar_application/features/home_screen/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:calendar_application/core/constants/gradients.dart';
 import 'package:calendar_application/common/widgets/app_button.dart';
-
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
+
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _rememberMe = false;
+
+  void _onLoginPressed() async {
+    final username = _usernameController.text.trim();
+    final isValid = await LoginController.validateUsername(username, _rememberMe);
+
+    if (isValid) {
+      
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+      builder: (context) => HomeScreen(),
+      ),
+    );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => InfoDialog(
+          title: "Error",
+          message: "Incorrect Username. Please try again.",
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +72,7 @@ class LoginForm extends StatelessWidget {
                     ),
                   ),
                   child: TextField(
+                    controller: _usernameController,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Username (Enter Provided Username)",
@@ -48,6 +83,7 @@ class LoginForm extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(2.0),
                   child: TextField(
+                    controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -59,10 +95,28 @@ class LoginForm extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Checkbox(
+                value: _rememberMe,
+                onChanged: (value) {
+                  setState(() {
+                    _rememberMe = value ?? false;
+                  });
+                },
+              ),
+              Text(
+                "Remember Me",
+                style: TextStyle(color: theme.onSurface),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
           AppButton(
             text: "Login",
-            onPressed: () {},
+            onPressed: _onLoginPressed,
             gradient: theme.brightness == Brightness.dark
                 ? DarkGradients.buttonGradient
                 : LightGradients.buttonGradient,
