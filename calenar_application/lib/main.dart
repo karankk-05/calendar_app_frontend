@@ -4,10 +4,12 @@ import 'package:calendar_application/themes/dark_theme.dart';
 import 'package:calendar_application/themes/light_theme.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp( const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: LightTheme.theme,
       darkTheme: DarkTheme.theme,
       themeMode: ThemeMode.system, // Automatically switch based on system settings
-      home:  Login(),
+      home:  const Login(),
     );
   }
 }
