@@ -28,9 +28,10 @@ class MyApp extends StatelessWidget {
       theme: LightTheme.theme,
       darkTheme: DarkTheme.theme,
       themeMode: ThemeMode.system,
-      home: username == null || (!username!.contains('Karan') && !username!.contains('Lorem'))
-          ? const LoginScreen()
-          : const HomeScreen(), // Conditional redirection based on username
+      // home: username == null || (!username!.contains('Karan') && !username!.contains('Lorem'))
+      //     ? const LoginScreen()
+      //     : const HomeScreen(), // Conditional redirection based on username
+      home: HomeScreen(),
     );
   }
 }
