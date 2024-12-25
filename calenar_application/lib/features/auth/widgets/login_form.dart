@@ -1,6 +1,6 @@
 import 'package:calendar_application/common/widgets/info_dialog.dart';
 import 'package:calendar_application/features/auth/controllers/login_controller.dart';
-import 'package:calendar_application/features/home_screen/screens/home_screen.dart';
+import 'package:calendar_application/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:calendar_application/core/constants/gradients.dart';
 import 'package:calendar_application/common/widgets/app_button.dart';

@@ -242,9 +242,3 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: CalendarWidget(),
-  ));
-}
