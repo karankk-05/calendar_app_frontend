@@ -1,19 +1,42 @@
+import 'package:calendar_application/features/home/controllers/calendar_api_service.dart';
 import 'package:flutter/material.dart';
 
 class CalendarController extends ChangeNotifier {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
+  final CalendarService _calendarService = CalendarService();
+  Map<String, Map<String, int>> _slotData = {};
 
   DateTime get focusedDay => _focusedDay;
   DateTime? get selectedDay => _selectedDay;
+  Map<String, Map<String, int>> get slotData => _slotData;
+
+  // Fetch slots when the month changes
+  void fetchSlots() async {
+    final startDate = DateTime(_focusedDay.year, _focusedDay.month, 1);
+    final endDate = DateTime(_focusedDay.year, _focusedDay.month + 1, 0);
+    print("Fetching");
+    try {
+      final data = await _calendarService.fetchSlots('Lorem', startDate, endDate);
+      _slotData = data;
+      print(data);
+      notifyListeners();
+    } catch (e) {
+      
+      // Handle error (e.g., show a snackbar)
+      print('Error fetching slots: $e');
+    }
+  }
 
   void previousMonth() {
     _focusedDay = DateTime(_focusedDay.year, _focusedDay.month - 1);
+    fetchSlots();  // Fetch new slots when month changes
     notifyListeners();
   }
 
   void nextMonth() {
     _focusedDay = DateTime(_focusedDay.year, _focusedDay.month + 1);
+    fetchSlots();  // Fetch new slots when month changes
     notifyListeners();
   }
 
@@ -36,26 +59,21 @@ class CalendarController extends ChangeNotifier {
 
     final days = <DateTime>[];
     
-    // Calculate the number of days to skip from the previous month to align the first day
-    final firstWeekday = firstDayOfMonth.weekday; // 1 = Monday, 7 = Sunday
-    final firstDayOffset = (firstWeekday == 7 ? 0 : firstWeekday);  // Adjust for the start of the week
-    
-    // Fill in days for the previous month (if any)
+    final firstWeekday = firstDayOfMonth.weekday;
+    final firstDayOffset = (firstWeekday == 7 ? 0 : firstWeekday);
+
     for (int i = 0; i < firstDayOffset; i++) {
       final prevMonthDay = firstDayOfMonth.subtract(Duration(days: firstDayOffset - i));
       days.add(prevMonthDay);
     }
 
-    // Add days for the current month
     for (int i = 1; i <= lastDayOfMonth.day; i++) {
       days.add(DateTime(_focusedDay.year, _focusedDay.month, i));
     }
 
-    // Ensure the calendar has enough days to fill up the last week
     final lastWeekday = lastDayOfMonth.weekday;
-    final daysToFill = (7 - lastWeekday) % 7;  // Days to fill up to the next month's first day
+    final daysToFill = (7 - lastWeekday) % 7;
 
-    // Add the next month's starting days to fill the last week
     for (int i = 1; i <= daysToFill; i++) {
       final nextMonthDay = DateTime(_focusedDay.year, _focusedDay.month + 1, i);
       days.add(nextMonthDay);

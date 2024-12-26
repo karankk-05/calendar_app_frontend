@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../controllers/calendar_controller.dart';
+import '../controllers/calendar_grid_controller.dart';
 import '../widgets/calendar_header.dart';
 import '../widgets/calendar_days_header.dart';
 import '../widgets/calendar_grid.dart';

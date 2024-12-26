@@ -1,12 +1,21 @@
+import 'package:calendar_application/features/home/controllers/calendar_color_util.dart';
+import 'package:calendar_application/features/home/controllers/calendar_grid_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../controllers/calendar_controller.dart';
 
-class CalendarGrid extends StatelessWidget {
+class CalendarGrid extends StatefulWidget {
+  @override
+  State<CalendarGrid> createState() => _CalendarGridState();
+}
+
+class _CalendarGridState extends State<CalendarGrid> {
+
+
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<CalendarController>(context);
     final daysInMonth = controller.generateDaysInMonth();
+    final slotData = controller.slotData;
 
     return GridView.builder(
       shrinkWrap: true,
@@ -19,29 +28,25 @@ class CalendarGrid extends StatelessWidget {
       itemCount: daysInMonth.length,
       itemBuilder: (context, index) {
         final day = daysInMonth[index];
-        
-        // Check if the day is part of the current month
+        final formattedDate = _formatDate(day);
         final isCurrentMonth = day.month == controller.focusedDay.month;
 
-        // If it's not part of the current month, display an empty space
         if (!isCurrentMonth) {
-          return Container(); // Empty container for previous month's days
+          return Container(); // Empty space for non-current month days
         }
 
         final isToday = day.day == DateTime.now().day &&
             day.month == DateTime.now().month &&
             day.year == DateTime.now().year;
+
         final isSelected = controller.selectedDay == day;
+        final dayColor = getDayColor(slotData[formattedDate]);
 
         return GestureDetector(
           onTap: () => controller.selectDay(day),
           child: Container(
             decoration: BoxDecoration(
-              color: isSelected
-                  ? Colors.green
-                  : isToday
-                      ? Colors.green.withOpacity(0.3)
-                      : Colors.white,
+              color: isSelected ? Colors.green : dayColor,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 color: isSelected ? Colors.green : Colors.grey.shade300,
@@ -60,5 +65,9 @@ class CalendarGrid extends StatelessWidget {
         );
       },
     );
+  }
+
+  String _formatDate(DateTime date) {
+    return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
   }
 }
