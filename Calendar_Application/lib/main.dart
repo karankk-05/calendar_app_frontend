@@ -1,6 +1,7 @@
 import 'package:calendar_application/features/auth/screens/login_screen.dart';
 import 'package:calendar_application/features/home/controllers/calendar_grid_controller.dart';
 import 'package:calendar_application/features/home/screens/home_screen.dart';
+import 'package:calendar_application/features/slots_view/controller/slot_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:calendar_application/themes/dark_theme.dart';
@@ -8,7 +9,6 @@ import 'package:calendar_application/themes/light_theme.dart';
 import 'package:provider/provider.dart';  
 
 void main() async {
-  //fetchSlots();
   WidgetsFlutterBinding.ensureInitialized(); // Ensure that bindings are initialized before running the app
   String? username = await getUsernameFromStorage(); // Retrieve the username
   runApp(MyApp(username: username));
@@ -26,17 +26,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  ChangeNotifierProvider(
-      create: (_) => CalendarController(),
+    return  MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CalendarController()),
+        ChangeNotifierProvider(create: (_) => SlotDetailsController()),
+      ],
        child:MaterialApp(
       title: 'Calendar Application',
       theme: LightTheme.theme,
       darkTheme: DarkTheme.theme,
       themeMode: ThemeMode.system,
-      home: username == null || (!username!.contains('Karan') && !username!.contains('Lorem'))
-          ? const LoginScreen()
-          : const HomeScreen(), // Conditional redirection based on username
-      
+      // home: username == null || (!username!.contains('Karan') && !username!.contains('Lorem'))
+      //     ? const LoginScreen()
+      //     : const HomeScreen(), // Conditional redirection based on username
+      home:const HomeScreen()
      ) );
   }
 }

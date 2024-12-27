@@ -1,8 +1,11 @@
+import 'package:calendar_application/core/constants/gradients.dart';
 import 'package:flutter/material.dart';
 
-Color getDayColor(Map<String, int>? slots) {
+Gradient getDayColor(Map<String, int>? slots, bool isDarkMode) {
   if (slots == null) {
-    return Colors.green; // Default color when all slots are available
+    return isDarkMode 
+        ? DarkGradients.EmptyGradient 
+        : LightGradients.EmptyGradient; // Default gradient when all slots are available
   }
 
   final totalSlots = slots['total_slots']!;
@@ -11,10 +14,16 @@ Color getDayColor(Map<String, int>? slots) {
   final filledSlotsRatio = (totalSlots - availableSlots) / totalSlots;
 
   if (filledSlotsRatio > 2 / 3) {
-    return Colors.red; // More than 2/3 slots are filled
+    return isDarkMode
+        ? DarkGradients.FullGradient
+        : LightGradients.FullGradient; // More than 2/3 slots are filled (Red for Full)
   } else if (filledSlotsRatio < 1 / 3) {
-    return Colors.green; // More than 2/3 slots are empty
+    return isDarkMode
+        ? DarkGradients.PartiallyEmptyGradient
+        : LightGradients.PartiallyEmptyGradient; // More than 2/3 slots are empty (Green for Partially Empty)
   } else {
-    return Colors.pink; // Between 1/3 and 2/3 slots are filled
+    return isDarkMode
+        ? DarkGradients.PartiallyFullGradient
+        : LightGradients.PartiallyFullGradient; // Between 1/3 and 2/3 slots are filled (Orange for Partially Full)
   }
 }

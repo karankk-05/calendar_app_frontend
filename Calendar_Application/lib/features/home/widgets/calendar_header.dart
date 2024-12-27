@@ -6,7 +6,7 @@ class CalendarHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<CalendarController>(context);
-
+    final theme = Theme.of(context).colorScheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -14,39 +14,39 @@ class CalendarHeader extends StatelessWidget {
           onTap: controller.previousMonth,
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: theme.primaryContainer,
               borderRadius: BorderRadius.circular(100),
-              border: Border.all(color: const Color(0xFFE0E0E0)),
+              border: Border.all(color: theme.onPrimaryContainer.withOpacity(0.3)),
             ),
             padding: const EdgeInsets.all(12),
-            child: const Icon(
+            child:  Icon(
               Icons.chevron_left,
               size: 28,
-              color: Colors.black87,
+              color:  theme.onPrimaryContainer,
             ),
           ),
         ),
         Text(
           "${controller.getMonthName()} ${controller.focusedDay.year}",
-          style: const TextStyle(
+          style:  TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Colors.black87,
+            color: theme.onPrimaryContainer,
           ),
         ),
         GestureDetector(
           onTap: controller.nextMonth,
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: theme.primaryContainer,
               borderRadius: BorderRadius.circular(100),
-              border: Border.all(color: const Color(0xFFE0E0E0)),
+              border: Border.all(color: theme.onPrimaryContainer.withOpacity(0.3)),
             ),
             padding: const EdgeInsets.all(12),
-            child: const Icon(
+            child:  Icon(
               Icons.chevron_right,
               size: 28,
-              color: Colors.black87,
+              color: theme.onPrimaryContainer,
             ),
           ),
         ),

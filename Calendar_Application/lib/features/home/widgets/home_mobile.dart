@@ -11,31 +11,52 @@ class HomeMobile extends StatefulWidget {
 }
 
 class _HomeMobileState extends State<HomeMobile> {
-    @override
+  @override
   void initState() {
     super.initState();
     // Initially fetch slots when the grid is built
     final controller = Provider.of<CalendarController>(context, listen: false);
     controller.fetchSlots();
   }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: const Text(
-            "Schedule",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+      backgroundColor: theme.surface,
+      appBar: AppBar(
+        backgroundColor: theme.surface,
+        elevation: 0,
+        title:  Text(
+          "Schedule",
+          style: TextStyle(
+            color: theme.onSurface,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
-          centerTitle: true,
         ),
-      body: CalendarScreen());
-    }
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.menu
+          ,color: theme.onSurface,), // Navigation Icon
+          onPressed: () {
+            // Add your action for the navigation icon (e.g., opening a drawer or performing an action)
+            print("Navigation Icon Pressed");
+          },
+          color: theme.primary, // Icon color (blue if theme is blue)
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.more_vert,color: theme.onSurface,), // Menu Icon
+            onPressed: () {
+              // Add your action for the menu icon (e.g., opening a settings menu)
+              print("Menu Icon Pressed");
+            },
+            color: theme.primary, // Icon color (blue if theme is blue)
+          ),
+        ],
+      ),
+      body: const CalendarScreen(),
+    );
+  }
 }

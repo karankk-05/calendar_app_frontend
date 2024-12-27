@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../controllers/calendar_grid_controller.dart';
 import '../widgets/calendar_header.dart';
 import '../widgets/calendar_days_header.dart';
 import '../widgets/calendar_grid.dart';
@@ -10,17 +8,18 @@ class CalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme=Theme.of(context).colorScheme;
     return
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
         child: SingleChildScrollView(  // Ensures content can scroll if needed
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: theme.primaryContainer,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  spreadRadius: 2,
+                  color: theme.onSurface.withOpacity(0.05),
+                  spreadRadius: 1,
                   blurRadius: 4,
                   offset: Offset(0, 3),
                 ),
