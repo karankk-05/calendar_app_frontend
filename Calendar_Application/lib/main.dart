@@ -15,7 +15,7 @@ void main() async {
 }
 
 Future<String?> getUsernameFromStorage() async {
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   return await storage.read(key: 'username'); // Retrieve the username saved under 'username' key
 }
 

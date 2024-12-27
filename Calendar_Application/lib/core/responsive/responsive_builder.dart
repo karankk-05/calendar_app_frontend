@@ -1,5 +1,6 @@
 /// This file contains the implementation of the ResponsiveBuilder widget, 
 /// which builds different widgets based on the screen width.
+library;
 
 import 'package:flutter/material.dart';
 

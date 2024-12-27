@@ -25,13 +25,13 @@ class _LoginFormState extends State<LoginForm> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-      builder: (context) => HomeScreen(),
+      builder: (context) => const HomeScreen(),
       ),
     );
     } else {
       showDialog(
         context: context,
-        builder: (context) => InfoDialog(
+        builder: (context) => const InfoDialog(
           title: "Error",
           message: "Incorrect Username. Please try again.",
         ),

@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import '../controllers/calendar_grid_controller.dart';
 
 class CalendarHeader extends StatelessWidget {
+  const CalendarHeader({super.key});
+
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<CalendarController>(context);

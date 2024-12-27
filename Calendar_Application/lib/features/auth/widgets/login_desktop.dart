@@ -77,10 +77,10 @@ class LoginDesktop extends StatelessWidget {
                   ),
                 ),
                 // Welcome Text
-                Center(
+                const Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         "Welcome",
                         textAlign: TextAlign.center,
@@ -110,13 +110,13 @@ class LoginDesktop extends StatelessWidget {
                       color: theme.onSurface.withOpacity(0.3),
                       
                       blurRadius: 10,
-                      offset: Offset(0, 2),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
-                child: Column(
+                child: const Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children: [
                     // Login Header
                     Text(
                       "Login",

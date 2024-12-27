@@ -72,9 +72,9 @@ class LoginMobile extends StatelessWidget {
                     ),
                   ),
                 
-                  Positioned(
+                  const Positioned(
                     child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         SizedBox(height: 100,)
                         ,
                         Center(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../widgets/calendar_header.dart';
-import '../widgets/calendar_days_header.dart';
-import '../widgets/calendar_grid.dart';
+import 'calendar_header.dart';
+import 'calendar_days_header.dart';
+import 'calendar_grid.dart';
 
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});
@@ -21,7 +21,7 @@ class CalendarScreen extends StatelessWidget {
                   color: theme.onSurface.withOpacity(0.05),
                   spreadRadius: 1,
                   blurRadius: 4,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
               borderRadius: BorderRadius.circular(8),

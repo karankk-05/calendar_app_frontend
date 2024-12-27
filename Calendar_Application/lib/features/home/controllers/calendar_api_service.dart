@@ -29,9 +29,9 @@ class CalendarService {
         throw HttpException('Failed to fetch slots: ${response.reasonPhrase}');
       }
     } on SocketException {
-      throw HttpException('No Internet connection');
+      throw const HttpException('No Internet connection');
     } on TimeoutException {
-      throw HttpException('Request timed out');
+      throw const HttpException('Request timed out');
     } catch (e) {
       throw HttpException('Unexpected error: $e');
     }

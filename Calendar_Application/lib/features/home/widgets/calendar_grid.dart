@@ -1,5 +1,5 @@
 import 'package:calendar_application/core/constants/gradients.dart';
-import 'package:calendar_application/features/home/controllers/calendar_color_util.dart';
+import 'package:calendar_application/core/utils/calendar_color_util.dart';
 import 'package:calendar_application/features/home/controllers/calendar_grid_controller.dart';
 import 'package:calendar_application/features/slots_view/controller/slot_details_controller.dart';
 import 'package:calendar_application/features/slots_view/widgets/slots_details_bottom_sheet.dart';
@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CalendarGrid extends StatefulWidget {
+  const CalendarGrid({super.key});
+
   @override
   State<CalendarGrid> createState() => _CalendarGridState();
 }
@@ -22,7 +24,7 @@ class _CalendarGridState extends State<CalendarGrid> {
 
     if (controller.isLoading) {
       // Show the CircularProgressIndicator while data is loading
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     }
@@ -79,7 +81,7 @@ class _CalendarGridState extends State<CalendarGrid> {
                 color: isSelected ? theme.primary : theme.onPrimaryContainer.withOpacity(0.2),
               ),
             ),
-            alignment: isToday ? Alignment.center : Alignment(-0.7, 0.9),
+            alignment: isToday ? Alignment.center : const Alignment(-0.7, 0.9),
             child: Text(
               '${day.day}',
               style: TextStyle(
