@@ -9,7 +9,6 @@ class CalendarService {
 
   Future<Map<String, Map<String, int>>> fetchSlots(String userId, DateTime startDate, DateTime endDate) async {
     final url = '$baseUrl/slots/total/?user_id=$userId&start_date=${_formatDate(startDate)}&end_date=${_formatDate(endDate)}';
-    print("Fetching in service");
     try {
       final response = await http.get(
         Uri.parse(url),

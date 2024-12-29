@@ -1,143 +1,141 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:calendar_application/features/slots_view/controller/slot_details_controller.dart';
 
-void showSlotDetailsBottomSheet(
-    BuildContext context, SlotDetailsController controller) {
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true,
-    isDismissible: true,
-    backgroundColor: Colors.transparent, // Make the bottom sheet transparent
-    builder: (BuildContext context) {
-      return DraggableScrollableSheet(
-        initialChildSize: 0.5,
-        minChildSize: 0.5,
-        maxChildSize: 1.0,
-        expand: true,
-        builder: (context, scrollController) {
-          return Consumer<SlotDetailsController>(
-            builder: (context, slotController, child) {
-              if (slotController.isLoading) {
-                return Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(16.0),
-                    ),
-                  ),
-                  child: const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              }
+class SlotDetailsView extends StatelessWidget {
+  final bool isLoading;
+  final Map<String, dynamic>? slotDetails;
+  final ScrollController scrollController;
 
-              if (slotController.slotDetails == null) {
-                return Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(16.0),
-                    ),
-                  ),
-                  child: const Center(
-                    child: Text('Failed to load slots'),
-                  ),
-                );
-              }
+  const SlotDetailsView({
+    Key? key,
+    required this.isLoading,
+    required this.slotDetails,
+    required this.scrollController,
+  }) : super(key: key);
 
-              final slots = slotController.slotDetails?['slots'] ?? [];
-              final filledSlots =
-                  slots.map((slot) => slot['start_time']).toSet();
+  @override
+  Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
-              return Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(16.0),
-                  ),
-                ),
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Slots for ${slotController.slotDetails?['date']}',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Expanded(
-                      child: ListView.builder(
-                        controller: scrollController,
-                        itemCount: 48, // 24 hours * 2 slots per hour
-                        itemBuilder: (context, index) {
-                          final startHour = index ~/ 2;
-                          final startMinute = (index % 2) * 30;
-                          final startTime =
-                              TimeOfDay(hour: startHour, minute: startMinute);
-                          final endTime = TimeOfDay(
-                            hour: (startHour + (startMinute + 30) ~/ 60) % 24,
-                            minute: (startMinute + 30) % 60,
-                          );
-                          final formattedStartTime =
-                              _formatTimeOfDay(startTime);
-                          final formattedEndTime = _formatTimeOfDay(endTime);
-                          final isFilled = filledSlots.contains(
-                              '${startTime.hour.toString().padLeft(2, '0')}:${startTime.minute.toString().padLeft(2, '0')}:00');
-
-                          return Container(
-                            margin: const EdgeInsets.symmetric(vertical: 4.0),
-                            decoration: BoxDecoration(
-                              color: isFilled
-                                  ? Colors.green.shade100
-                                  : Colors.grey.shade200,
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: isFilled
-                                    ? Colors.green
-                                    : Colors.grey.shade400,
-                              ),
-                            ),
-                            child: ListTile(
-                              leading: Icon(
-                                isFilled
-                                    ? Icons.check_circle
-                                    : Icons.access_time,
-                                color:
-                                    isFilled ? Colors.green : Colors.grey,
-                              ),
-                              title: Text(
-                                '$formattedStartTime - $formattedEndTime',
-                                style: TextStyle(
-                                  fontWeight: isFilled
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
-                                  color: isFilled
-                                      ? Colors.green.shade800
-                                      : Colors.black87,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
+    if (slotDetails == null) {
+      return const Center(
+        child: Text(
+          'No Slots Booked For This Date',
+          style: TextStyle(fontSize: 16, color: Colors.grey),
+        ),
       );
-    },
-  );
-}
+    }
 
-String _formatTimeOfDay(TimeOfDay time) {
-  final hour = time.hourOfPeriod == 0 ? 12 : time.hourOfPeriod;
-  final period = time.period == DayPeriod.am ? 'AM' : 'PM';
-  return '${hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')} $period';
+    final slots = slotDetails!['slots'] ?? [];
+    final filledSlots = slots.map((slot) => slot['start_time']).toSet();
+
+    return SingleChildScrollView(
+      controller: scrollController,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Available Slots for ${slotDetails?['date']}',
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Column(
+            children: List.generate(24, (hour) {
+              // Get the two slots for the current hour
+              final firstSlotKey =
+                  '${hour.toString().padLeft(2, '0')}:00:00';
+              final secondSlotKey =
+                  '${hour.toString().padLeft(2, '0')}:30:00';
+
+              final isFirstSlotFilled = filledSlots.contains(firstSlotKey);
+              final isSecondSlotFilled = filledSlots.contains(secondSlotKey);
+
+              // If both slots are empty, combine into one hour block
+              if (!isFirstSlotFilled && !isSecondSlotFilled) {
+                return _buildTimelineRow(
+                  timeLabel: '${_formatHour(hour)} ${_formatHour(hour + 1)}',
+                  isFilled: false,
+                );
+              }
+
+              // Otherwise, split into two half-hour blocks
+              return Column(
+                children: [
+                  _buildTimelineRow(
+                    timeLabel: '${_formatHour(hour)} ${_formatHour(hour, 30)}',
+                    isFilled: isFirstSlotFilled,
+                  ),
+                  _buildTimelineRow(
+                    timeLabel: '${_formatHour(hour, 30)} ${_formatHour(hour + 1)}',
+                    isFilled: isSecondSlotFilled,
+                  ),
+                ],
+              );
+            }),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTimelineRow({
+    required String timeLabel,
+    required bool isFilled,
+  }) {
+    return Row(
+      children: [
+        // Time Label
+        Container(
+          alignment: Alignment.centerLeft,
+          width: 70,
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            timeLabel,
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.black54,
+            ),
+            textAlign: TextAlign.right,
+          ),
+        ),
+        const SizedBox(width: 8),
+        // Timeline Slot
+        Expanded(
+          child: Container(
+            height: 40,
+            margin: const EdgeInsets.symmetric(vertical: 4.0),
+            decoration: BoxDecoration(
+              color: isFilled ? Colors.red : Colors.green,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Center(
+              child: Text(
+                isFilled ? 'Filled' : 'Available',
+                style: TextStyle(
+                  fontSize: 14,
+                  color:  Colors.white ,
+                  fontWeight: isFilled ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  String _formatHour(int hour, [int minute = 0]) {
+    final period = hour >= 12 ? 'PM' : 'AM';
+    final formattedHour = hour % 12 == 0 ? 12 : hour % 12;
+    final formattedMinute = minute.toString().padLeft(2, '0');
+    return '$formattedHour:$formattedMinute $period';
+  }
 }
