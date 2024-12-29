@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:calendar_application/core/utils/date_time_utils.dart';
 import 'package:calendar_application/main.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,7 +9,7 @@ class CalendarService {
   final String baseUrl = MyApp.baseUrl;
 
   Future<Map<String, Map<String, int>>> fetchSlots(String userId, DateTime startDate, DateTime endDate) async {
-    final url = '$baseUrl/slots/total/?user_id=$userId&start_date=${_formatDate(startDate)}&end_date=${_formatDate(endDate)}';
+    final url = '$baseUrl/slots/total/?user_id=$userId&start_date=${formatDateforAPI(startDate)}&end_date=${formatDateforAPI(endDate)}';
     try {
       final response = await http.get(
         Uri.parse(url),
@@ -36,7 +37,5 @@ class CalendarService {
     }
   }
 
-  String _formatDate(DateTime date) {
-    return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
-  }
+  
 }

@@ -1,11 +1,12 @@
+import 'package:calendar_application/core/utils/date_time_utils.dart';
 import 'package:flutter/material.dart';
 
-class SlotDetailsView extends StatelessWidget {
+class SlotsDetails extends StatelessWidget {
   final bool isLoading;
   final Map<String, dynamic>? slotDetails;
   final ScrollController scrollController;
 
-  const SlotDetailsView({
+  const SlotsDetails({
     Key? key,
     required this.isLoading,
     required this.slotDetails,
@@ -14,19 +15,22 @@ class SlotDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
 
     if (slotDetails == null) {
-      return const Center(
+      return Center(
         child: Text(
           'No Slots Booked For This Date',
-          style: TextStyle(fontSize: 16, color: Colors.grey),
+          style: TextStyle(fontSize: 16, color: theme.onSurface),
         ),
       );
     }
 
+    final formattedDate = formatDate(slotDetails?['date']); // Use extracted function
     final slots = slotDetails!['slots'] ?? [];
     final filledSlots = slots.map((slot) => slot['start_time']).toSet();
 
@@ -37,45 +41,45 @@ class SlotDetailsView extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Available Slots for ${slotDetails?['date']}',
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+            child: Center(
+              child: Text(
+                'Available Slots for $formattedDate',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: theme.onSurface,
+                ),
               ),
             ),
           ),
           const SizedBox(height: 16),
           Column(
             children: List.generate(24, (hour) {
-              // Get the two slots for the current hour
-              final firstSlotKey =
-                  '${hour.toString().padLeft(2, '0')}:00:00';
-              final secondSlotKey =
-                  '${hour.toString().padLeft(2, '0')}:30:00';
+              final firstSlotKey = '${hour.toString().padLeft(2, '0')}:00:00';
+              final secondSlotKey = '${hour.toString().padLeft(2, '0')}:30:00';
 
               final isFirstSlotFilled = filledSlots.contains(firstSlotKey);
               final isSecondSlotFilled = filledSlots.contains(secondSlotKey);
 
-              // If both slots are empty, combine into one hour block
               if (!isFirstSlotFilled && !isSecondSlotFilled) {
                 return _buildTimelineRow(
-                  timeLabel: '${_formatHour(hour)} ${_formatHour(hour + 1)}',
+                  timeLabel: '${formatHour(hour)} ${formatHour(hour + 1)}', // Use extracted function
                   isFilled: false,
+                  theme: theme,
                 );
               }
 
-              // Otherwise, split into two half-hour blocks
               return Column(
                 children: [
                   _buildTimelineRow(
-                    timeLabel: '${_formatHour(hour)} ${_formatHour(hour, 30)}',
+                    timeLabel: '${formatHour(hour)} ${formatHour(hour, 30)}', // Use extracted function
                     isFilled: isFirstSlotFilled,
+                    theme: theme,
                   ),
                   _buildTimelineRow(
-                    timeLabel: '${_formatHour(hour, 30)} ${_formatHour(hour + 1)}',
+                    timeLabel: '${formatHour(hour, 30)} ${formatHour(hour + 1)}', // Use extracted function
                     isFilled: isSecondSlotFilled,
+                    theme: theme,
                   ),
                 ],
               );
@@ -89,40 +93,44 @@ class SlotDetailsView extends StatelessWidget {
   Widget _buildTimelineRow({
     required String timeLabel,
     required bool isFilled,
+    required ColorScheme theme,
   }) {
+    final isDarkMode = theme.brightness == Brightness.dark;
     return Row(
       children: [
-        // Time Label
         Container(
           alignment: Alignment.centerLeft,
           width: 70,
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
             timeLabel,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
-              color: Colors.black54,
+              color: theme.onSurface.withOpacity(0.8),
             ),
             textAlign: TextAlign.right,
           ),
         ),
         const SizedBox(width: 8),
-        // Timeline Slot
         Expanded(
           child: Container(
             height: 40,
             margin: const EdgeInsets.symmetric(vertical: 4.0),
             decoration: BoxDecoration(
-              color: isFilled ? Colors.red : Colors.green,
+              color: isDarkMode
+                  ? (isFilled
+                      ? const Color(0xFFFA7268).withOpacity(0.8)
+                      : const Color(0xFF69C779).withOpacity(0.8))
+                  : (isFilled ? const Color(0xFFE53935) : const Color(0xFF43A047)),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Center(
               child: Text(
-                isFilled ? 'Filled' : 'Available',
-                style: TextStyle(
+                isFilled ? 'Booked' : 'Available',
+                style: const TextStyle(
                   fontSize: 14,
-                  color:  Colors.white ,
-                  fontWeight: isFilled ? FontWeight.bold : FontWeight.normal,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -130,12 +138,5 @@ class SlotDetailsView extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  String _formatHour(int hour, [int minute = 0]) {
-    final period = hour >= 12 ? 'PM' : 'AM';
-    final formattedHour = hour % 12 == 0 ? 12 : hour % 12;
-    final formattedMinute = minute.toString().padLeft(2, '0');
-    return '$formattedHour:$formattedMinute $period';
   }
 }

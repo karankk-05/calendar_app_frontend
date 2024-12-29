@@ -1,6 +1,6 @@
 // lib/features/slots_view/screens/slot_details_screen.dart
 import 'package:calendar_application/core/responsive/responsive_builder.dart';
-import 'package:calendar_application/features/slots_view/widgets/slots_details_bottom_sheet.dart';
+import 'package:calendar_application/features/slots_view/widgets/slots_detail_widget.dart';
 import 'package:flutter/material.dart';
 class SlotDetailsScreen extends StatelessWidget {
   final bool isLoading;
@@ -37,7 +37,7 @@ class SlotDetailsScreen extends StatelessWidget {
               ),
             ),
             padding: const EdgeInsets.all(16.0),
-            child: SlotDetailsView(
+            child: SlotsDetails(
               isLoading: isLoading,
               slotDetails: slotDetails,
               scrollController: scrollController,
@@ -54,7 +54,7 @@ class SlotDetailsScreen extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        child: SlotDetailsView(
+        child: SlotsDetails(
           isLoading: isLoading,
           slotDetails: slotDetails,
           scrollController: ScrollController(),

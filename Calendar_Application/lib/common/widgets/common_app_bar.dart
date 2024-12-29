@@ -17,7 +17,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         "Calendar",
         style: TextStyle(
           color: theme.onSurface,
-          fontSize: 20,
+          fontSize: 23,
           fontWeight: FontWeight.bold,
         ),
       ),

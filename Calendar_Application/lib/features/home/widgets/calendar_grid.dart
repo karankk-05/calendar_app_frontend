@@ -1,8 +1,9 @@
 import 'package:calendar_application/core/constants/gradients.dart';
 import 'package:calendar_application/core/utils/calendar_color_util.dart';
+import 'package:calendar_application/core/utils/date_time_utils.dart';
 import 'package:calendar_application/features/home/controllers/calendar_grid_controller.dart';
 import 'package:calendar_application/features/slots_view/controller/slot_details_service.dart';
-import 'package:calendar_application/features/slots_view/widgets/slot_details.dart';
+import 'package:calendar_application/features/slots_view/widgets/slots_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class CalendarGrid extends StatefulWidget {
@@ -39,7 +40,7 @@ class _CalendarGridState extends State<CalendarGrid> {
               itemCount: daysInMonth.length,
               itemBuilder: (context, index) {
                 final day = daysInMonth[index];
-                final formattedDate = _formatDate(day);
+                final formattedDate = formatDateforAPI(day);
                 final isCurrentMonth = day.month == controller.focusedDay.month;
 
                 if (!isCurrentMonth) {
@@ -74,7 +75,7 @@ class _CalendarGridState extends State<CalendarGrid> {
                         builder: (context) {
                           return ChangeNotifierProvider.value(
                             value: slotDetailsController,
-                            child: const SlotsDetailsBottomSheet(),
+                            child: const SlotsBottomSheet(),
                           );
                         },
                       );
@@ -114,7 +115,5 @@ class _CalendarGridState extends State<CalendarGrid> {
     );
   }
 
-  String _formatDate(DateTime date) {
-    return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
-  }
+
 }

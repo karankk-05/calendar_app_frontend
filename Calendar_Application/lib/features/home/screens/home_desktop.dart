@@ -1,10 +1,9 @@
 import 'package:calendar_application/common/widgets/common_app_bar.dart';
 import 'package:calendar_application/features/home/controllers/calendar_grid_controller.dart';
-import 'package:calendar_application/features/slots_view/widgets/slots_details_bottom_sheet.dart';
+import 'package:calendar_application/features/slots_view/widgets/slots_detail_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:calendar_application/features/home/widgets/calendar_screen.dart';
 import 'package:calendar_application/features/slots_view/controller/slot_details_service.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class HomeDesktop extends StatefulWidget {
@@ -67,7 +66,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
                     children: [
                       
                       Expanded(
-                        child: SlotDetailsView(
+                        child: SlotsDetails(
                           isLoading: slotDetailsController.isLoading,
                           slotDetails: slotDetailsController.slotDetails,
                           scrollController: scrollController, // Pass the scrollController here
