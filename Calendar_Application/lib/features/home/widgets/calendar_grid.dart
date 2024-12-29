@@ -9,6 +9,10 @@ import 'package:calendar_application/features/slots/widgets/slots_bottom_sheet.d
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
+/// The CalendarGrid widget renders the calendar days for the current month in a grid format.
+/// It supports features like displaying selected days, identifying today's date, and color-coding days based on slot availability.
+/// Users can interact with individual days to view or manage related slot details.
+
 class CalendarGrid extends StatefulWidget {
   const CalendarGrid({super.key});
 

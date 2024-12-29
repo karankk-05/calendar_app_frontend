@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// The CalendarDaysHeader widget displays the days of the week (Sunday to Saturday) as a row.
+/// It ensures a consistent style with the app's theme and provides a header for the calendar grid.
 class CalendarDaysHeader extends StatelessWidget {
   const CalendarDaysHeader({super.key});
 

@@ -6,6 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:calendar_application/core/constants/gradients.dart';
 import 'package:provider/provider.dart';
 
+/// The HomeMobile widget defines the mobile layout for the calendar application.
+/// Features a scrollable column with the calendar widget and slot legends.
+/// Adapts the design to smaller screens while maintaining functionality.
+/// Fetches slot data on initialization using the CalendarController.
+
 class HomeMobile extends StatefulWidget {
   const HomeMobile({super.key});
 

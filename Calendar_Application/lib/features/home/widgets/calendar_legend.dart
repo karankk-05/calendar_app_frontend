@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// The LegendItem widget is a reusable component for displaying legends in the calendar.
+/// It includes a color indicator, icon, and label to explain the meaning of different day statuses.
+
 class LegendItem extends StatelessWidget {
   final String label;
   final IconData icon;

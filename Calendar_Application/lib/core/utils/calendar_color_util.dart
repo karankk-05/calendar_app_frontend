@@ -1,6 +1,11 @@
 import 'package:calendar_application/core/constants/gradients.dart';
 import 'package:flutter/material.dart';
 
+/// The `getDayColor` function returns a gradient based on the availability of slots for a specific day. 
+/// It calculates the filled slots ratio and selects a gradient according to the percentage of filled slots, 
+/// while considering the app’s theme (dark or light mode). 
+/// The function provides different gradient colors for full, partially full, and empty days.
+
 Gradient getDayColor(Map<String, int>? slots, bool isDarkMode) {
   if (slots == null) {
     return isDarkMode 

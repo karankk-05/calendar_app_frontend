@@ -2,6 +2,10 @@ import 'package:calendar_application/core/utils/date_time_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+/// The SlotsDetails widget displays the details of available or booked slots for a specific date.
+/// It shows a loading animation if data is being fetched, and displays the slots in a list format when data is available.
+/// The widget also provides visual feedback on whether a slot is available or booked.
+
 class SlotsDetails extends StatelessWidget {
   final bool isLoading;
   final Map<String, dynamic>? slotDetails;

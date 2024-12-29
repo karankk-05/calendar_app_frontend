@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+/// A custom button widget that supports a gradient background, text display, and a loading state.
+/// The button can be disabled during loading, showing a progress indicator instead of the text.
 
 class AppButton extends StatelessWidget {
   final String text;

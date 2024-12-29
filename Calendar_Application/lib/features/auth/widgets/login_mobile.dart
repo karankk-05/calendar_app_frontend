@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:calendar_application/features/auth/widgets/login_form.dart';
 import 'package:calendar_application/core/constants/asset_paths.dart';
 
+
+/// The LoginMobile widget provides a mobile-specific login interface, 
+/// incorporating animations and a responsive design for smaller screens.
+/// Handles the mobile layout of the login screen.
 class LoginMobile extends StatefulWidget {
   const LoginMobile({super.key});
 

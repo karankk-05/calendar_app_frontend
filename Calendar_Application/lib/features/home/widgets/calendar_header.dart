@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controllers/calendar_grid_controller.dart';
 
+/// The CalendarHeader widget provides navigation controls for the calendar.
+/// It displays the current month and year, and includes buttons to navigate to the previous and next months.
+
 class CalendarHeader extends StatelessWidget {
   const CalendarHeader({super.key});
 

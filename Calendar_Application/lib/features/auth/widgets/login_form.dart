@@ -6,6 +6,9 @@ import 'package:calendar_application/features/home/screens/home_screen.dart';
 import 'package:calendar_application/core/constants/gradients.dart';
 import 'package:calendar_application/common/widgets/app_button.dart';
 
+/// The LoginForm widget implements the login functionality, including user 
+/// input fields, validation, and error handling, with an optional "Remember Me" feature.
+/// Handles the login form layout.
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
 
@@ -53,6 +56,7 @@ class _LoginFormState extends State<LoginForm> {
 
       // Show error dialog
       showDialog(
+        // ignore: use_build_context_synchronously
         context: context,
         builder: (context) => const InfoDialog(
           title: "Error",

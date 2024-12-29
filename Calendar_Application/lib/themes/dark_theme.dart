@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-///Class for defining dark theme colors for the whole app
+
+/// This file defines the dark theme configuration for the application.
+/// It includes color schemes and styles used when the app is in dark mode.
 class DarkTheme {
   static final ThemeData theme = ThemeData(
     colorScheme: const ColorScheme(

@@ -1,5 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+/// This controller manages login functionality, including username validation 
+/// and secure storage for the "Remember Me" feature.
+
 class LoginController {
   static const FlutterSecureStorage _secureStorage = FlutterSecureStorage();
 

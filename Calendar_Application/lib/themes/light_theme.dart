@@ -1,6 +1,9 @@
-///Class for defining light theme colors for the whole app
-
 import 'package:flutter/material.dart';
+
+
+/// This file defines the light theme configuration for the application.
+/// It includes color schemes and styles used when the app is in light mode.
+
 class LightTheme {
   static final ThemeData theme = ThemeData(
     colorScheme: const ColorScheme(

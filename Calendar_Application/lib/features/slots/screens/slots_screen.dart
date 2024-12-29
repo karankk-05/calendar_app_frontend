@@ -1,7 +1,11 @@
-// lib/features/slots_view/screens/slot_details_screen.dart
 import 'package:calendar_application/core/responsive/responsive_builder.dart';
 import 'package:calendar_application/features/slots/widgets/slots_detail_widget.dart';
 import 'package:flutter/material.dart';
+
+/// The SlotDetailsScreen widget displays slot details in a responsive layout.
+/// It adapts to different screen sizes by showing a bottom sheet for mobile and a dialog for desktop.
+/// It uses the SlotsDetails widget to display available or booked slots.
+
 class SlotDetailsScreen extends StatelessWidget {
   final bool isLoading;
   final Map<String, dynamic>? slotDetails;

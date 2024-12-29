@@ -2,6 +2,9 @@ import 'package:calendar_application/features/home/controllers/calendar_grid_con
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// A dialog that allows the user to input a specific date manually in the format "dd/mm/yyyy".
+/// It validates the input and updates the calendar view with the selected date.
+
 class ManualDateDialog extends StatelessWidget {
   const ManualDateDialog({super.key});
 

@@ -8,6 +8,11 @@ import 'package:calendar_application/features/slots/controller/slot_details_serv
 import 'package:provider/provider.dart';
 import 'package:calendar_application/core/constants/gradients.dart';
 
+/// The HomeDesktop widget defines the desktop layout for the calendar application.
+/// Includes a calendar widget, legends for slot availability, and a details panel.
+/// Adapts its UI based on the current theme (light or dark).
+/// Fetches slot data on initialization using the CalendarController.
+
 class HomeDesktop extends StatefulWidget {
   const HomeDesktop({super.key});
 

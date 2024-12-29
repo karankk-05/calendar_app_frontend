@@ -8,6 +8,13 @@ import 'package:calendar_application/themes/dark_theme.dart';
 import 'package:calendar_application/themes/light_theme.dart';
 import 'package:provider/provider.dart';  
 
+
+
+/// This file serves as the entry point for the Calendar Application.
+/// It initializes the app, sets up the necessary providers, and determines the initial screen
+/// (either the login screen or the home screen) based on user authentication status.
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensure that bindings are initialized before running the app
   String? username = await getUsernameFromStorage(); // Retrieve the username
@@ -38,8 +45,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       home: username == null || (!username!.contains('Lorem'))
           ? const LoginScreen()
-          : const HomeScreen(), // Conditional redirection based on username
-      //home:const HomeScreen()
+          : const HomeScreen(), // Conditional redirection
      ) );
   }
 }

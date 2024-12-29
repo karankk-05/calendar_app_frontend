@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+/// A dialog box that displays informational messages with a title and a message.
+/// It contains an "OK" button to close the dialog after the user reads the information.
 
 class InfoDialog extends StatelessWidget {
   final String title;

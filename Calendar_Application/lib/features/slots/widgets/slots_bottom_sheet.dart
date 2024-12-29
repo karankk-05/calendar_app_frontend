@@ -4,6 +4,10 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:calendar_application/features/slots/controller/slot_details_service.dart';
 
+/// The SlotsBottomSheet widget displays the slot details in a draggable sheet that can be scrolled. 
+/// It shows either a loading animation or the available slot details based on the loading state. 
+/// The widget adjusts its appearance based on the current theme of the app.
+
 class SlotsBottomSheet extends StatelessWidget {
   const SlotsBottomSheet({super.key});
 

@@ -3,6 +3,10 @@ import 'package:calendar_application/features/home/controllers/calendar_grid_con
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
+/// A widget that displays a menu with options like "Jump to Date" and "Jump to Today".
+/// It allows the user to navigate to a specific date or reset the view to the current day.
+
 class MenuActions extends StatelessWidget {
   const MenuActions({super.key, required this.theme});
 

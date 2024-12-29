@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:calendar_application/features/auth/widgets/login_form.dart';
 import 'package:calendar_application/core/constants/asset_paths.dart';
 
+
+/// The LoginDesktop widget displays an animated login screen for desktop 
+/// users, featuring elastic transitions, a welcome message, and a clock widget.
+/// Handles the desktop layout of the login screen.
 class LoginDesktop extends StatefulWidget {
   const LoginDesktop({super.key});
 

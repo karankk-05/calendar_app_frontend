@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'calendar_api_service.dart';
 
+/// The CalendarController class manages calendar data and UI state.
+/// It fetches slot data for the current month and tracks selected and focused days.
+/// Includes methods to navigate between months and manage loading states.
+/// Notifies listeners to update the UI on data or state changes.
+
 class CalendarController extends ChangeNotifier {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -21,14 +26,9 @@ class CalendarController extends ChangeNotifier {
     
     final startDate = DateTime(_focusedDay.year, _focusedDay.month, 1);
     final endDate = DateTime(_focusedDay.year, _focusedDay.month + 1, 0);
-    print("Fetching");
-    
     try {
       final data = await _calendarService.fetchSlots('Lorem', startDate, endDate);
       _slotData = data;
-      print(data);
-    } catch (e) {
-      print('Error fetching slots: $e');
     } finally {
       _isLoading = false;  // Set loading to false when fetching is complete
       notifyListeners();  // Notify listeners to rebuild the UI

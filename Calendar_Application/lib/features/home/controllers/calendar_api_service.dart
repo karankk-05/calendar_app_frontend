@@ -5,6 +5,11 @@ import 'package:calendar_application/core/utils/date_time_utils.dart';
 import 'package:calendar_application/main.dart';
 import 'package:http/http.dart' as http;
 
+/// The CalendarService class handles API interactions to fetch slot data.
+/// It makes HTTP GET requests to retrieve available slots for specified dates.
+/// Includes error handling for network, timeout, and unexpected issues.
+/// Returns data in a structured Map for further processing.
+
 class CalendarService {
   final String baseUrl = MyApp.baseUrl;
 
@@ -14,8 +19,7 @@ class CalendarService {
       final response = await http.get(
         Uri.parse(url),
         headers: {'accept': 'application/json'},
-      ).timeout(const Duration(seconds: 90)); // Add timeout
-      print(response.statusCode);
+      ).timeout(const Duration(seconds: 90)); 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as List;
         return {

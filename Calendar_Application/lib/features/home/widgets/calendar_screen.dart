@@ -3,6 +3,8 @@ import 'calendar_header.dart';
 import 'calendar_days_header.dart';
 import 'calendar_grid.dart';
 
+/// The CalendarScreen widget integrates the calendar header, days header, and calendar grid into a single screen.
+/// It provides the main user interface for viewing and interacting with the calendar.
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});
 
