@@ -32,8 +32,6 @@ flutter:
     - assets/images/light-1.png
     - assets/images/light-2.png
     - assets/images/clock.png
-    - assets/lottie_animation/Hello.json
-    - assets/lottie_animation/success.lottie
     - assets/lottie_animation/success.json
     - assets/lottie_animation/loading.json
     - assets/lottie_animation/dark_loading.json
