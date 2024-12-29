@@ -14,7 +14,7 @@ class CalendarService {
       final response = await http.get(
         Uri.parse(url),
         headers: {'accept': 'application/json'},
-      ).timeout(const Duration(seconds: 30)); // Add timeout
+      ).timeout(const Duration(seconds: 90)); // Add timeout
       print(response.statusCode);
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as List;

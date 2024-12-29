@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:calendar_application/common/widgets/info_dialog.dart';
 import 'package:calendar_application/features/auth/controllers/login_controller.dart';
 import 'package:calendar_application/features/home/screens/home_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:calendar_application/core/constants/gradients.dart';
 import 'package:calendar_application/common/widgets/app_button.dart';
+
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
 
@@ -15,20 +17,41 @@ class _LoginFormState extends State<LoginForm> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _rememberMe = false;
+  bool _isLoggingIn = false; // To track the login state
+  bool _showSuccessAnimation = false; // To control the Lottie animation
 
   void _onLoginPressed() async {
+    setState(() {
+      _isLoggingIn = true;
+    });
+
     final username = _usernameController.text.trim();
     final isValid = await LoginController.validateUsername(username, _rememberMe);
 
     if (isValid) {
-      
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-      builder: (context) => const HomeScreen(),
-      ),
-    );
+      setState(() {
+        _showSuccessAnimation = true;
+      });
+
+      // Wait for 2 seconds to show the animation
+      await Future.delayed(const Duration(seconds: 2));
+
+      // Navigate to the HomeScreen
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
+          ),
+        );
+      }
     } else {
+      setState(() {
+        _isLoggingIn = false;
+        _showSuccessAnimation = false;
+      });
+
+      // Show error dialog
       showDialog(
         context: context,
         builder: (context) => const InfoDialog(
@@ -114,13 +137,23 @@ class _LoginFormState extends State<LoginForm> {
             ],
           ),
           const SizedBox(height: 20),
-          AppButton(
-            text: "Login",
-            onPressed: _onLoginPressed,
-            gradient: theme.brightness == Brightness.dark
-                ? DarkGradients.buttonGradient
-                : LightGradients.buttonGradient,
-          ),
+
+          // Show the Login Button or Success Animation
+          _showSuccessAnimation
+              ? Lottie.asset(
+                  'assets/lottie_animation/success.json',
+                  height: 100,
+                  repeat: false,
+                )
+              : AppButton(
+                  text: _isLoggingIn ? "Logging In..." : "Login",
+                  onPressed: _onLoginPressed,
+                  gradient: theme.brightness == Brightness.dark
+                      ? DarkGradients.buttonGradient
+                      : LightGradients.buttonGradient,
+                  isLoading: _isLoggingIn, // Optional loading state
+                ),
+
           const SizedBox(height: 30),
           Text(
             "Forgot Password?",

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MenuActions extends StatelessWidget {
-  const MenuActions({Key? key, required this.theme}) : super(key: key);
+  const MenuActions({super.key, required this.theme});
 
   final ColorScheme theme;
 

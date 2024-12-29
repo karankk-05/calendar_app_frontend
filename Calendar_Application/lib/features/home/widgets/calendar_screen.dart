@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'calendar_header.dart';
 import 'calendar_days_header.dart';
 import 'calendar_grid.dart';
-import 'calendar_legend.dart'; // Import the legend widget
 
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});

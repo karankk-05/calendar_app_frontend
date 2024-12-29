@@ -7,10 +7,10 @@ class SlotDetailsScreen extends StatelessWidget {
   final Map<String, dynamic>? slotDetails;
 
   const SlotDetailsScreen({
-    Key? key,
+    super.key,
     required this.isLoading,
     required this.slotDetails,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

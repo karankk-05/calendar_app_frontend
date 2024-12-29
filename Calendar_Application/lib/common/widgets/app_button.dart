@@ -4,11 +4,14 @@ class AppButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final Gradient gradient;
+  final bool isLoading; // New parameter to indicate loading state
 
-  const AppButton({super.key, 
+  const AppButton({
+    super.key,
     required this.text,
     required this.onPressed,
     required this.gradient,
+    this.isLoading = false, // Default is not loading
   });
 
   @override
@@ -16,10 +19,28 @@ class AppButton extends StatelessWidget {
     return Container(
       height: 50,
       width: double.infinity,
-      decoration: BoxDecoration(gradient: gradient, borderRadius: BorderRadius.circular(10)),
+      decoration: BoxDecoration(
+        gradient: gradient,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: TextButton(
-        onPressed: onPressed,
-        child: Text(text, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        onPressed: isLoading ? null : onPressed, // Disable button when loading
+        child: isLoading
+            ? const SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  color: Colors.white, // Loader color
+                  strokeWidth: 2.5,    // Thickness of the loader
+                ),
+              )
+            : Text(
+                text,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
       ),
     );
   }

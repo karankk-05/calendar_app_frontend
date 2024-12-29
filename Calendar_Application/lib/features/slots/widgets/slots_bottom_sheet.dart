@@ -1,10 +1,11 @@
 import 'package:calendar_application/features/slots/widgets/slots_detail_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:calendar_application/features/slots/controller/slot_details_service.dart';
 
 class SlotsBottomSheet extends StatelessWidget {
-  const SlotsBottomSheet({Key? key}) : super(key: key);
+  const SlotsBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +19,16 @@ class SlotsBottomSheet extends StatelessWidget {
         return Container(
           decoration:  BoxDecoration(
             color: theme.surface,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(16.0)),
           ),
           padding: const EdgeInsets.all(16.0),
           child: slotDetailsController.isLoading
-              ? const Center(child: CircularProgressIndicator())
+              ?  Center(child: Lottie.asset(
+        'assets/lottie_animation/dark_loading.json',
+        width: 250,
+        height: 250,
+        fit: BoxFit.fill,
+      ),)
               : SlotsDetails(
                   isLoading: slotDetailsController.isLoading,
                   slotDetails: slotDetailsController.slotDetails,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:calendar_application/core/constants/gradients.dart';
 
 class LegendItem extends StatelessWidget {
   final String label;
@@ -8,12 +7,12 @@ class LegendItem extends StatelessWidget {
   final Gradient gradient;
 
   const LegendItem({
-    Key? key,
+    super.key,
     required this.label,
     required this.icon,
     required this.color,
     required this.gradient,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

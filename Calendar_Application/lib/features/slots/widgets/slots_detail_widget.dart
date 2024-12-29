@@ -1,5 +1,6 @@
 import 'package:calendar_application/core/utils/date_time_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class SlotsDetails extends StatelessWidget {
   final bool isLoading;
@@ -7,18 +8,26 @@ class SlotsDetails extends StatelessWidget {
   final ScrollController scrollController;
 
   const SlotsDetails({
-    Key? key,
+    super.key,
     required this.isLoading,
     required this.slotDetails,
     required this.scrollController,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
 
     if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return 
+    Center(
+      child: Lottie.asset(
+        'assets/lottie_animation/dark_loading.json',
+        width: 250,
+        height: 250,
+        fit: BoxFit.fill,
+      ),
+    );
     }
 
     if (slotDetails == null) {
