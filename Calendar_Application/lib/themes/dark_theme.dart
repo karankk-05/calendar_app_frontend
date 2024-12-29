@@ -14,7 +14,7 @@ class DarkTheme {
       surface: Color.fromARGB(255, 8, 15, 40),
       onSurface: Colors.white,
       error: Color(0xFFFF453A),
-      onError: Colors.black,
+      onError: Color.fromARGB(255, 255, 255, 255),
       brightness: Brightness.dark,
     ),
   );

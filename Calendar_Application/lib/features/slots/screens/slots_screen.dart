@@ -1,6 +1,6 @@
 // lib/features/slots_view/screens/slot_details_screen.dart
 import 'package:calendar_application/core/responsive/responsive_builder.dart';
-import 'package:calendar_application/features/slots_view/widgets/slots_detail_widget.dart';
+import 'package:calendar_application/features/slots/widgets/slots_detail_widget.dart';
 import 'package:flutter/material.dart';
 class SlotDetailsScreen extends StatelessWidget {
   final bool isLoading;
