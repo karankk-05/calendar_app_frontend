@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="calendar_application"
+        android:label="Calendar Application"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

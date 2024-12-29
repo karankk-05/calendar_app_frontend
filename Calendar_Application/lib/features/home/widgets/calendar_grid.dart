@@ -21,16 +21,14 @@ class _CalendarGridState extends State<CalendarGrid> {
   Timer? _delayTimer;
 
   @override
-  void initState() {
-    super.initState();
-    final controller = Provider.of<CalendarController>(context, listen: false);
-
-    if (controller.isLoading) {
-      _startDelayTimer();
-    }
+  void dispose() {
+    _delayTimer?.cancel();
+    super.dispose();
   }
 
   void _startDelayTimer() {
+    // Cancel any existing timer
+    _delayTimer?.cancel();
     _delayTimer = Timer(const Duration(seconds: 10), () {
       if (mounted) {
         setState(() {
@@ -41,18 +39,18 @@ class _CalendarGridState extends State<CalendarGrid> {
   }
 
   @override
-  void dispose() {
-    _delayTimer?.cancel();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final controller = Provider.of<CalendarController>(context);
-    final daysInMonth = controller.generateDaysInMonth();
-    final slotData = controller.slotData;
     final theme = Theme.of(context).colorScheme;
-    final isDarkMode = theme.brightness == Brightness.dark;
+
+    // Start delay timer if loading is true
+    if (controller.isLoading && !_isDelayed) {
+      _startDelayTimer();
+    } else if (!controller.isLoading) {
+      // Reset the delayed state if loading completes
+      _isDelayed = false;
+      _delayTimer?.cancel();
+    }
 
     if (controller.isLoading) {
       return SizedBox(
@@ -71,7 +69,7 @@ class _CalendarGridState extends State<CalendarGrid> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: Text(
-                    'The backend server (on Render) delays the request for up to 50 seconds if used after a long time. Please wait for some time as it resumes. 🙂',
+                  'The backend server (on Render) delays the request for up to 50 seconds if used after a long time. Please wait for some time as it resumes. 🙂',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: theme.onPrimaryContainer,
@@ -84,6 +82,10 @@ class _CalendarGridState extends State<CalendarGrid> {
         ),
       );
     }
+
+    final daysInMonth = controller.generateDaysInMonth();
+    final slotData = controller.slotData;
+    final isDarkMode = theme.brightness == Brightness.dark;
 
     return GridView.builder(
       shrinkWrap: true,
