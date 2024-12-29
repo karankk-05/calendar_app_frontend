@@ -1,4 +1,3 @@
-import 'package:calendar_application/features/auth/screens/login_screen.dart';
 import 'package:calendar_application/features/home/controllers/calendar_grid_controller.dart';
 import 'package:calendar_application/features/home/screens/home_screen.dart';
 import 'package:calendar_application/features/slots_view/controller/slot_details_service.dart';
@@ -15,7 +14,7 @@ void main() async {
 }
 
 Future<String?> getUsernameFromStorage() async {
-  final storage = const FlutterSecureStorage();
+  const storage = FlutterSecureStorage();
   return await storage.read(key: 'username'); // Retrieve the username saved under 'username' key
 }
 

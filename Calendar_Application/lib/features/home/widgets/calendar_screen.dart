@@ -26,15 +26,15 @@ class CalendarScreen extends StatelessWidget {
             ],
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,  // Aligns the content to the left
               children: [
                 CalendarHeader(),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 CalendarDaysHeader(),
-                const SizedBox(height: 15),
+                SizedBox(height: 15),
                 // Make sure CalendarGrid doesn't take up too much space
                 CalendarGrid(),
               ],

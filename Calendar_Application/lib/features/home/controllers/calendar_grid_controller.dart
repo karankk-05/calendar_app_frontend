@@ -34,7 +34,10 @@ class CalendarController extends ChangeNotifier {
       notifyListeners();  // Notify listeners to rebuild the UI
     }
   }
-
+  set focusedDay(DateTime newDate) {
+    _focusedDay = newDate;
+    notifyListeners(); // Notify listeners of the change
+  }
   void previousMonth() {
     _focusedDay = DateTime(_focusedDay.year, _focusedDay.month - 1);
     fetchSlots();  // Fetch new slots when month changes

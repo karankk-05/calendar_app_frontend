@@ -1,5 +1,5 @@
+import 'package:calendar_application/common/controllers/menu_controller.dart';
 import 'package:flutter/material.dart';
-
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CommonAppBar({
     super.key,
@@ -28,21 +28,11 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           color: theme.onSurface,
         ),
         onPressed: () {
-          // Add your action for the navigation icon (e.g., opening a drawer or performing an action)
-          print("Navigation Icon Pressed");
+          // Open a drawer or any other action for the menu icon
         },
       ),
       actions: [
-        IconButton(
-          icon: Icon(
-            Icons.more_vert,
-            color: theme.onSurface,
-          ),
-          onPressed: () {
-            // Add your action for the menu icon (e.g., opening a settings menu)
-            print("Menu Icon Pressed");
-          },
-        ),
+        MenuActions(theme: theme),
       ],
     );
   }
