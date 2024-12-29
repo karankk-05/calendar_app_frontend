@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'calendar_header.dart';
 import 'calendar_days_header.dart';
 import 'calendar_grid.dart';
+import 'calendar_legend.dart'; // Import the legend widget
 
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});
@@ -12,34 +13,38 @@ class CalendarScreen extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-      child: SingleChildScrollView(  // Ensures content can scroll if needed
-        child: Container(
-          decoration: BoxDecoration(
-            color: theme.primaryContainer,
-            boxShadow: [
-              BoxShadow(
-                color: theme.onSurface.withOpacity(0.05),
-                spreadRadius: 1,
-                blurRadius: 4,
-                offset: const Offset(0, 3),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: theme.primaryContainer,
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.onSurface.withOpacity(0.05),
+                    spreadRadius: 1,
+                    blurRadius: 4,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(8),
               ),
-            ],
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,  // Aligns the content to the left
-              children: [
-                CalendarHeader(),
-                SizedBox(height: 16),
-                CalendarDaysHeader(),
-                SizedBox(height: 15),
-                // Make sure CalendarGrid doesn't take up too much space
-                CalendarGrid(),
-              ],
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CalendarHeader(),
+                    SizedBox(height: 16),
+                    CalendarDaysHeader(),
+                    SizedBox(height: 15),
+                    CalendarGrid(),
+                  ],
+                ),
+              ),
             ),
-          ),
+            // Add the legend below the calendar
+          ],
         ),
       ),
     );

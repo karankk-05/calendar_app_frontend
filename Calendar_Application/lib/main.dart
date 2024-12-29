@@ -1,3 +1,4 @@
+import 'package:calendar_application/features/auth/screens/login_screen.dart';
 import 'package:calendar_application/features/home/controllers/calendar_grid_controller.dart';
 import 'package:calendar_application/features/home/screens/home_screen.dart';
 import 'package:calendar_application/features/slots/controller/slot_details_service.dart';
@@ -35,10 +36,10 @@ class MyApp extends StatelessWidget {
       theme: LightTheme.theme,
       darkTheme: DarkTheme.theme,
       themeMode: ThemeMode.system,
-      // home: username == null || (!username!.contains('Karan') && !username!.contains('Lorem'))
-      //     ? const LoginScreen()
-      //     : const HomeScreen(), // Conditional redirection based on username
-      home:const HomeScreen()
+      home: username == null || (!username!.contains('Lorem'))
+          ? const LoginScreen()
+          : const HomeScreen(), // Conditional redirection based on username
+      //home:const HomeScreen()
      ) );
   }
 }

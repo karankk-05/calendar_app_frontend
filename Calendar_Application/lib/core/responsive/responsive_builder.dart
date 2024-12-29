@@ -17,7 +17,7 @@ class ResponsiveBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-    if (width >= 700) {
+    if (width >= 770) {
       return desktop;
     } else {
       return mobile;

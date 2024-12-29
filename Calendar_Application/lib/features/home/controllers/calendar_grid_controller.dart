@@ -1,5 +1,5 @@
-import 'package:calendar_application/features/home/controllers/calendar_api_service.dart';
 import 'package:flutter/material.dart';
+import 'calendar_api_service.dart';
 
 class CalendarController extends ChangeNotifier {
   DateTime _focusedDay = DateTime.now();
@@ -34,10 +34,12 @@ class CalendarController extends ChangeNotifier {
       notifyListeners();  // Notify listeners to rebuild the UI
     }
   }
+
   set focusedDay(DateTime newDate) {
     _focusedDay = newDate;
     notifyListeners(); // Notify listeners of the change
   }
+
   void previousMonth() {
     _focusedDay = DateTime(_focusedDay.year, _focusedDay.month - 1);
     fetchSlots();  // Fetch new slots when month changes
@@ -68,7 +70,7 @@ class CalendarController extends ChangeNotifier {
     final lastDayOfMonth = DateTime(_focusedDay.year, _focusedDay.month + 1, 0);
 
     final days = <DateTime>[];
-    
+
     final firstWeekday = firstDayOfMonth.weekday;
     final firstDayOffset = (firstWeekday == 7 ? 0 : firstWeekday);
 

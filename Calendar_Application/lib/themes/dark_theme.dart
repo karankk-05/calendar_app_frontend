@@ -11,7 +11,7 @@ class DarkTheme {
       onSecondary: Colors.black,
       secondaryContainer: Color.fromARGB(255, 30, 47, 83),
       onSecondaryContainer: Color.fromARGB(255, 236, 244, 250),
-      surface: Color.fromARGB(255, 8, 15, 40),
+      surface: Color.fromARGB(255, 10, 20, 53),
       onSurface: Colors.white,
       error: Color(0xFFFF453A),
       onError: Color.fromARGB(255, 255, 255, 255),
